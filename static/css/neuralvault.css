@@ -1,0 +1,355 @@
+:root {
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+    --color-dark-gray-bg: #1A1A1A; 
+    --color-medium-gray-elements: #333333; 
+    --color-light-gray-text: #AAAAAA;
+    --color-text-content: #EEEEEE; 
+    --color-search-bar-bg: #2C2C2E; 
+}
+
+body {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; 
+}
+
+
+.content-area-wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: var(--color-black);
+    padding: 25px 0; 
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); 
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+.sidebar-section {
+    margin-bottom: 30px; /* More space between sections */
+    padding: 0 20px; /* More horizontal padding */
+}
+.sidebar-header-text {
+    font-size: 0.9em; /* Slightly smaller for subtle header */
+    font-weight: 500;
+    margin-bottom: 15px; /* More space below header */
+    color: var(--color-light-gray-text); /* Muted gray for header text */
+    text-transform: uppercase; /* Notion-style uppercase */
+    letter-spacing: 0.05em;
+    padding: 0 5px; /* Adjust padding to align with list items */
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sidebar li {
+    margin-bottom: 5px; /* Increased spacing between items */
+}
+.sidebar a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* More padding for clickable area */
+    color: var(--color-white); /* Pure white links */
+    text-decoration: none;
+    border-radius: 4px; /* Subtle rounded corners */
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ensures long titles are cut with ellipsis */
+}
+.sidebar a:hover {
+    background-color: var(--color-dark-gray-bg); /* Dark gray on hover */
+    color: var(--color-white);
+}
+.sidebar a.active {
+    background-color: var(--color-medium-gray-elements); /* Medium gray for active state */
+    color: var(--color-white);
+    font-weight: 500;
+}
+.sidebar-icon {
+    margin-right: 12px; /* More space for icons */
+    color: var(--color-light-gray-text); /* Muted gray icons */
+    font-size: 1.1em;
+}
+.add-page-button {
+    background: none;
+    border: none;
+    color: var(--color-light-gray-text); /* Muted gray button text */
+    padding: 10px 20px; /* Consistent padding */
+    border-radius: 4px;
+    text-align: left;
+    margin-top: 15px; /* More space above */
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    display: flex;
+    align-items: center;
+}
+.add-page-button:hover {
+    background-color: var(--color-dark-gray-bg);
+    color: var(--color-white);
+}
+.sidebar-hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--color-dark-gray-bg); /* Very dark gray separator */
+    margin: 20px 20px; /* Padding for the separator */
+}
+
+/* --- Main Content Styles (Clean & Premium) --- */
+.main-content {
+    flex-grow: 1;
+    padding: 100px 60px 60px 60px; /* More top padding to push content down */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    overflow-y: auto; /* Scroll for note content */
+    background-color: var(--color-black);
+}
+.search-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Adjusted width to be more like ChatGPT search bar */
+    margin-bottom: 40px; /* Space below search area before results/note */
+}
+.search-bar-container {
+    display: flex;
+    width: 100%;
+    background-color: var(--color-search-bar-bg); /* Darker gray for search input background */
+    border-radius: 30px; /* Highly rounded */
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Prominent, soft shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Very subtle white border for depth */
+    height: 55px; /* Fixed height for a sleek look */
+    align-items: center;
+}
+.search-input {
+    flex-grow: 1;
+    padding: 0 25px; /* Padding inside the rounded bar */
+    font-size: 1.1em; /* Adjusted font size for sleekness */
+    border: none;
+    background: transparent;
+    color: var(--color-white);
+    outline: none;
+    height: 100%; /* Fill container height */
+}
+.search-input::placeholder {
+    color: var(--color-light-gray-text);
+}
+/* Removed mic-button styles */
+
+/* --- Note Detail View Styles (Clean & Premium) --- */
+#noteDetailView {
+    width: 100%;
+    max-width: 960px; /* Wider content area */
+    display: none;
+    background-color: var(--color-black); /* Pure black background for the content itself */
+    padding: 0px 50px 40px 50px; /* Reduced top padding, others same */
+    border-radius: 8px; /* Kept for overall note view container, but content areas inside flow */
+    color: var(--color-white);
+}
+#noteDetailView h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 3em; /* Larger, more prominent title */
+    font-weight: 700;
+    color: var(--color-white);
+    margin-bottom: 10px;
+    line-height: 1.2;
+    margin-top: 20px; /* Added margin for space after optional image */
+    outline: none; /* Remove outline when contenteditable is focused */
+}
+#noteDetailView .meta-info {
+    font-size: 1em;
+    color: var(--color-light-gray-text);
+    margin-bottom: 30px; /* More space below meta */
+    border-bottom: 1px solid var(--color-dark-gray-bg); /* Subtle separator */
+    padding-bottom: 15px;
+}
+#noteDetailView .section-title {
+    font-family: 'Inter', sans-serif; /* Use Inter for section titles too */
+    font-size: 1.6em; /* Larger section titles */
+    font-weight: 600;
+    color: var(--color-white);
+    margin-top: 40px; /* More space above sections */
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-dark-gray-bg);
+    padding-bottom: 8px;
+}
+#noteDetailView .content-area {
+    background-color: transparent; /* Removed background to make it flow */
+    padding: 0; /* Removed padding */
+    border-radius: 0; /* Removed border-radius */
+    /* Removed box-shadow */
+    margin-bottom: 20px; /* Slightly reduced margin-bottom */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--color-text-content); /* Lighter white for content text */
+    line-height: 1.7; /* Increased line height for readability */
+    font-size: 1.05em; /* Slightly larger text */
+    outline: none; /* Remove outline when contenteditable is focused */
+}
+#noteDetailView .tag-item {
+    display: inline-block;
+    background-color: var(--color-medium-gray-elements); /* Medium gray tag background */
+    color: var(--color-white);
+    padding: 6px 12px; /* More padding for tags */
+    border-radius: 16px; /* More rounded tags */
+    margin: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+#noteDetailView .task-list ul {
+    list-style-type: none; /* Removed default bullet points */
+    padding-left: 0; /* Align left */
+    color: var(--color-text-content);
+}
+#noteDetailView .task-list li {
+    margin-bottom: 8px; /* More space between tasks */
+    display: flex; /* For aligning checkbox and text */
+    align-items: center;
+}
+#noteDetailView .task-list li input[type="checkbox"] {
+    margin-right: 10px; /* Space between checkbox and text */
+    width: 18px; /* Larger checkbox */
+    height: 18px;
+    accent-color: var(--color-medium-gray-elements); /* Custom color for checked state */
+    cursor: pointer;
+}
+#noteDetailView .task-list li label {
+    flex-grow: 1; /* Allow label to take up space */
+    cursor: text; /* Allow text selection */
+}
+#noteDetailView audio {
+    width: 100%;
+    margin-top: 30px; /* More space above audio */
+    background-color: transparent; /* Made audio player background transparent */
+    border-radius: 0; /* Removed border radius */
+    padding: 0; /* Removed padding */
+}
+.back-to-search-button {
+    background-color: var(--color-dark-gray-bg);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 25px; /* Larger button */
+    border-radius: 8px; /* More rounded */
+    cursor: pointer;
+    margin-bottom: 40px; /* More space from title/image */
+    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+.back-to-search-button:hover {
+    background-color: var(--color-medium-gray-elements);
+}
+.loading-notes-sidebar, .loading-note-details, .no-notes-sidebar {
+    color: var(--color-light-gray-text);
+    font-style: italic;
+    padding: 15px; /* More padding */
+    text-align: center;
+}
+/* Search Results Styling (Clean & Premium) */
+.search-result-item {
+    background-color: var(--color-dark-gray-bg); /* Dark gray for search result boxes */
+    border-radius: 8px;
+    padding: 20px; /* More padding */
+    margin-bottom: 20px; /* More space between results */
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+.search-result-item:hover {
+    background-color: var(--color-medium-gray-elements); /* Medium gray on hover */
+}
+.search-result-item h4 {
+    color: var(--color-white);
+    margin-bottom: 8px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+.search-result-item p {
+    color: var(--color-text-content);
+    font-size: 1em;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+.search-result-item .view-button {
+    background-color: var(--color-medium-gray-elements);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+.search-result-item .view-button:hover {
+    background-color: #555;
+}
+/* Formatting Toolbar Styles */
+.formatting-toolbar {
+    background-color: var(--color-medium-gray-elements);
+    border-radius: 8px;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+.toolbar-button {
+    background: none;
+    border: none;
+    color: var(--color-white);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+    min-width: 40px;
+}
+.toolbar-button:hover {
+    background-color: #555;
+}
+.toolbar-button:active {
+    background-color: #666;
+}
+/* Save Changes Button */
+.save-changes-button {
+    background-color: #007bff; /* A standard blue for save */
+    color: var(--color-white);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 40px;
+    transition: background-color 0.3s ease;
+    font-size: 1.1em;
+    font-weight: 500;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.save-changes-button:hover {
+    background-color: #0056b3;
+}
+.save-changes-button:disabled {
+    background-color: #4A4A4A; /* Darker gray for disabled state */
+    cursor: not-allowed;
+}

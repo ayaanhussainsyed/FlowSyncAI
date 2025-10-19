@@ -1,0 +1,263 @@
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif; /* Set UniversalSans or a similar font */
+    font-size: 14px; /* Reduced base font size to match Grok */
+}
+
+.chat-page {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically initially */
+    align-items: center; /* Center content horizontally */
+    padding-top: 80px; /* Space for fixed navbar */
+    padding-bottom: 100px; /* Space for fixed input area */
+    transition: justify-content 0.5s ease-in-out, padding-top 0.5s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.chat-page.conversation-active {
+    justify-content: flex-start; /* Shift content to top when chat begins */
+}
+
+.intro-section {
+    text-align: center;
+    width: 100%;
+    max-width: 800px; /* Max width for heading */
+    transition: margin-bottom 0.5s ease-in-out, font-size 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+}
+
+.intro-section h1 {
+    font-family: 'Geist', sans-serif; /* Keep Geist for the main heading for impact */
+    font-size: 40px; /* Slightly reduced font size for heading */
+    margin-bottom: 40px; /* Space between heading and where first message would be */
+    color: #e0e0e0; /* Slightly off-white for softer look */
+    margin-top: 0;
+}
+
+.chat-messages-container {
+    flex-grow: 1; /* Allows messages to take available space */
+    width: 100%;
+    max-width: 800px; /* Max width for message bubbles */
+    overflow-y: auto; /* Enable scrolling for messages */
+    padding: 0 20px; /* Padding for message bubbles from sides */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between messages */
+    opacity: 0; /* Hidden initially */
+    transform: translateY(20px); /* Slight offset for animation */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, max-height 0.5s ease-in-out;
+    max-height: 0; /* Initially no height */
+}
+
+.chat-messages-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: calc(100vh - 250px); /* Adjust based on navbar and input height */
+}
+
+.message-bubble {
+    padding: 8px 12px; /* Reduced padding for a more compact look */
+    border-radius: 8px; /* Slightly less rounded, more like text blocks */
+    max-width: 80%;
+    word-wrap: break-word;
+    line-height: 1.5;
+    font-size: 14px; /* Explicitly set message font size */
+    color: white;
+    background-color: transparent; /* No background color for messages */
+}
+
+.user-message {
+    align-self: flex-end; /* Align to the right */
+    text-align: right; /* Text aligns right within bubble */
+}
+
+.ai-message {
+    align-self: flex-start; /* Align to the left */
+    text-align: left; /* Text aligns left within bubble */
+}
+
+/* Styling for formatted AI responses */
+.ai-message p {
+    margin-bottom: 0.5em; /* Space between paragraphs */
+    margin-top: 0.5em;
+}
+.ai-message p:first-child {
+    margin-top: 0;
+}
+.ai-message p:last-child {
+    margin-bottom: 0;
+}
+
+.ai-message strong {
+    font-weight: 600; /* Bolder bold */
+}
+
+.ai-message em {
+    font-style: italic;
+}
+
+.ai-message pre {
+    background-color: #2a2a2a; /* Darker background for code blocks */
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto; /* Scroll for long lines */
+    font-family: 'Source Code Pro', monospace; /* Code font */
+    font-size: 13px; /* Smaller font for code */
+    line-height: 1.4;
+    white-space: pre-wrap; /* Ensure wrapping for pre blocks */
+}
+
+.ai-message code {
+    font-family: 'Source Code Pro', monospace; /* Code font */
+    background-color: #3a3a3a; /* Slightly different background for inline code */
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+.input-area-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    background-color: black; /* To cover content when scrolling */
+    z-index: 1000;
+}
+
+.input-area {
+    display: flex;
+    align-items: flex-end; /* Align items to the bottom, useful for multiline input */
+    width: 100%;
+    max-width: 800px; /* Consistent with chat messages container */
+    background-color: #262626; /* Background for the input bar */
+    border-radius: 28px; /* More rounded */
+    padding: 8px; /* Padding inside the input bar */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.input-area textarea {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 14px; /* Match page font size */
+    outline: none;
+    resize: none; /* Disable manual resize */
+    height: 40px; /* Initial height */
+    min-height: 40px;
+    max-height: 150px; /* Limit height for multi-line input */
+    overflow-y: auto;
+    line-height: 1.5;
+    font-family: 'Inter', sans-serif; /* Apply font to input */
+}
+
+.input-area textarea::-webkit-scrollbar {
+    width: 6px;
+}
+.input-area textarea::-webkit-scrollbar-track {
+    background: #262626;
+}
+.input-area textarea::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 3px;
+}
+
+.input-area textarea::placeholder {
+    color: #888;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: flex-end; /* Align to bottom of textarea */
+    gap: 8px;
+    padding-right: 8px; /* Space before mic/send button */
+}
+
+.icon-button {
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.icon-button:hover {
+    background-color: #3a3a3a;
+}
+
+.icon-button svg {
+    fill: #bbb; /* Light grey for icons */
+    width: 20px;
+    height: 20px;
+}
+
+.send-button {
+    background-color: #3b82f6; /* Blue send button */
+    border: none;
+    width: 44px; /* Slightly larger */
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.send-button:hover {
+    background-color: #2563eb;
+}
+
+.send-button svg {
+    fill: white; /* White arrow */
+    width: 22px;
+    height: 22px;
+}
+
+.mic-button.recording {
+    background-color: red;
+}
+.mic-button.recording svg {
+    fill: white;
+}
+
+/* Navbar styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black; /* Or a slightly transparent black */
+    z-index: 2000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.navbar-brand {
+    font-family: 'Geist', sans-serif; /* Keep Geist for brand */
+    font-size: 24px;
+    font-weight: 700;
+}
+.navbar-nav .nav-link {
+    font-family: 'Inter', sans-serif; /* Keep Inter for nav links */
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+}

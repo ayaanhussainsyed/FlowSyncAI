@@ -1,0 +1,170 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Inter', sans-serif;
+}
+.head h1 {
+    text-align: center;
+    font-size: 59px;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.2) 0%, white 25%, rgba(255, 255, 255, 0.2) 50%, white 75%, rgba(255, 255, 255, 0.2) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    background-size: 200% 100%;
+    animation: liveTextGradient 3s linear 1 forwards;
+}
+@keyframes liveTextGradient {
+    0% { background-position: 100% 0; }
+    100% { background-position: 0% 0; }
+}
+nav {
+    color: white;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 700px;
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(255, 255, 255, 0.35) 30%,
+        rgba(255, 255, 255, 0.08) 60%,
+        rgba(255, 255, 255, 0) 90%
+    );
+    filter: blur(150px);
+    opacity: 1;
+    z-index: 1;
+    pointer-events: none;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 250px;
+    background-image:
+        radial-gradient(circle at 15% 25%, rgba(255, 255, 255, 0.3) 0.5px, transparent 1px),
+        radial-gradient(circle at 65% 55%, rgba(255, 255, 255, 0.2) 0.5px, transparent 1px),
+        radial-gradient(circle at 35% 85%, rgba(255, 255, 255, 0.4) 0.5px, transparent 1px),
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.1) 0.5px, transparent 1px);
+    background-repeat: repeat;
+    background-size: 150px 150px;
+    filter: blur(0px);
+    opacity: 0.7;
+    z-index: 2;
+    pointer-events: none;
+    animation: floatParticles 30s infinite linear;
+}
+@keyframes floatParticles {
+    from { background-position: 0 0; }
+    to { background-position: 300px 300px; }
+}
+.mic {
+    background-color: white;
+    border: none;
+    width: 80px;
+    height: 75px;
+    border-radius: 35px;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.mic.recording {
+    background-color: red;
+}
+.mic svg {
+    fill: black;
+}
+.mic.recording svg {
+    fill: white;
+}
+.head p {
+    text-align: center;
+    color: #949495;
+    position: relative;
+    z-index: 3;
+}
+#transcript-area, #summary-area {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #1a1a1a; /* Added background color */
+    border-radius: 8px;
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    opacity: 0; /* Initially hidden for fade-in */
+    transition: opacity 1s ease-in-out; /* Fade-in transition */
+}
+#note-title { /* Style for the new title */
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+#transcript-area h3, #summary-area h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+#transcript-content, #summary-content, #tasks-content, #tags-content {
+    color: #ccc;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+#loading-indicator {
+    text-align: center;
+    margin-top: 20px;
+    display: none;
+    color: #949495;
+}
+.action-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+.action-button:hover {
+    background-color: #e0e0e0;
+}
+#upload-tasks-button, #saveNoteButton {
+    display: none; /* Hidden by default */
+}
+.read-more-button {
+    background: none;
+    border: none;
+    color: #007bff; /* A distinct color for the link */
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    margin-left: 5px;
+}
+.read-more-button:hover {
+    text-decoration: underline;
+}
+.tag-item {
+    display: inline-block;
+    background-color: #333;
+    color: #eee;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 5px;
+    font-size: 0.9em;
+}

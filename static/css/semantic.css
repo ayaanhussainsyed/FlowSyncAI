@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: black; 
+    overflow: hidden; /* Prevent body scroll, Vis.js handles internal pan/zoom */
+    /* Figma-like background: white with small black dots */
+    background-color: white; /* Fallback */
+    background-image: radial-gradient(circle at 1px 1px, black 1px, transparent 0);
+    background-size: 20px 20px; /* Adjust spacing of dots */
+}
+
+
+#network-canvas {
+    width: 100vw; /* Full viewport width */
+    height: calc(100vh - 56px); /* Full viewport height minus navbar height (approx 56px) */
+    background-color: transparent; /* Make Vis.js background transparent to show body background */
+    border: none; /* No border for seamless look */
+    margin-top: 0;
+}
+.message {
+    padding: 10px;
+    margin: 10px auto; /* Centered message */
+    border-radius: 5px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    position: absolute; /* Position over the canvas */
+    top: 60px; /* Below navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000; /* Above the canvas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.message.error {
+    background-color: rgba(255, 0, 0, 0.2); /* Reddish transparent */
+    color: black;
+    border: 1px solid rgba(255, 0, 0, 0.4);
+}
+.message.info {
+    background-color: rgba(0, 123, 255, 0.2); /* Bluish transparent */
+    color: black;
+    border: 1px solid rgba(0, 123, 255, 0.4);
+}
+.message.success {
+    background-color: rgba(40, 167, 69, 0.2); /* Greenish transparent */
+    color: black;
+    border: 1px solid rgba(40, 167, 69, 0.4);
+}
+#loadingSpinner {
+    display: none;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+    color: black;
+}
+#loadingSpinner::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 10px auto;
+    border: 4px solid rgba(0,0,0,.3); /* Black spinner */
+    border-radius: 50%;
+    border-top-color: black;
+    animation: spin 1s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
