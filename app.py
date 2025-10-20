@@ -32,7 +32,7 @@ if not openai_api_key:
     raise ValueError("api key err.")
 
 openai_client = OpenAI(api_key=openai_api_key)
-FINE_TUNED_MODEL_ID = "ft:gpt-4.1-mini-2025-04-14:personal:idrak:BrpILK1b"
+FINE_TUNED_MODEL_ID = "enter your model file/id"
 
 def login_required(f):
     """Decorator to ensure user is logged in."""
